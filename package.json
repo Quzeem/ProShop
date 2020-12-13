@@ -5,10 +5,12 @@
   "main": "server.js",
   "type": "module",
   "scripts": {
-    "start": "node backend/server",
+    "start": "NODE_ENV=production node backend/server",
     "server": "nodemon backend/server",
     "client": "npm start --prefix frontend",
-    "dev": "concurrently \"npm run server\" \"npm run client\""
+    "dev": "concurrently \"npm run server\" \"npm run client\"",
+    "data:import": "node backend/seeder -i",
+    "data:delete": "node backend/seeder -d"
   },
   "repository": {
     "type": "git",
@@ -21,12 +23,17 @@
   },
   "homepage": "https://github.com/Quzeem/ProShop#readme",
   "dependencies": {
+    "bcryptjs": "^2.4.3",
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
+    "express-async-handler": "^1.1.4",
     "mongoose": "^5.11.7"
   },
   "devDependencies": {
     "concurrently": "^5.3.0",
     "nodemon": "^2.0.6"
+  },
+  "optionalDependencies": {
+    "win-node-env": "^0.4.0"
   }
 }

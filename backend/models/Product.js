@@ -1,6 +1,6 @@
 import mongoose from 'mongoose'
 
-const reviewSchema = new mongoose.Schema(
+const ReviewSchema = new mongoose.Schema(
   {
     name: { type: String, required: true },
     rating: { type: Number, required: true },
@@ -9,7 +9,7 @@ const reviewSchema = new mongoose.Schema(
   { timestamps: true }
 )
 
-const productSchema = new mongoose.Schema(
+const ProductSchema = new mongoose.Schema(
   {
     user: {
       type: mongoose.Schema.Types.ObjectId,
@@ -37,7 +37,7 @@ const productSchema = new mongoose.Schema(
       required: true,
     },
     // Array of subdocuments
-    reviews: [reviewSchema],
+    reviews: [ReviewSchema],
     avgRating: {
       type: Number,
       required: true,
@@ -64,6 +64,6 @@ const productSchema = new mongoose.Schema(
   }
 )
 
-const Product = mongoose.model('Product', productSchema)
+const Product = mongoose.model('Product', ProductSchema)
 
 export default Product
