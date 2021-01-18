@@ -3,6 +3,7 @@ import dotenv from 'dotenv'
 import { unhandledRoutes, errorHandler } from './middleware/error.js'
 import productRoutes from './routes/product.js'
 import userRoutes from './routes/user.js'
+import orderRoutes from './routes/order.js'
 import connectDB from './config/db.js'
 
 // Load env variables
@@ -18,6 +19,7 @@ app.use(express.json())
 // Mount Routers
 app.use('/api/products', productRoutes)
 app.use('/api/users', userRoutes)
+app.use('/api/orders', orderRoutes)
 
 app.get('/', (req, res) => {
   res.send('API is running...')
