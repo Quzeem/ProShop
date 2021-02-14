@@ -1,3 +1,4 @@
+import path from 'path'
 import express from 'express'
 import dotenv from 'dotenv'
 import { unhandledRoutes, errorHandler } from './middleware/error.js'
@@ -15,6 +16,9 @@ connectDB()
 const app = express()
 
 app.use(express.json())
+
+const __dirname = path.resolve()
+app.use('/uploads', express.static(path.join(__dirname, 'uploads')))
 
 // Mount Routers
 app.use('/api/products', productRoutes)
