@@ -39,12 +39,28 @@ const App = () => {
             <Route path='/order/:id' component={OrderScreen} />
             <Route path='/admin/userlist' component={UserListScreen} />
             <Route path='/admin/user/:id/edit' component={UserEditScreen} />
-            <Route path='/admin/productlist' component={ProductListScreen} />
+            <Route
+              path='/admin/productlist'
+              component={ProductListScreen}
+              exact
+            />
+            <Route
+              path='/admin/productlist/:pageNumber'
+              component={ProductListScreen}
+            />
             <Route
               path='/admin/product/:id/edit'
               component={ProductEditScreen}
             />
             <Route path='/admin/orderlist' component={OrderListScreen} />
+            <Route path='/search/:keyword' component={HomeScreen} exact />
+            {/* Pagination without search */}
+            <Route path='/page/:pageNumber' component={HomeScreen} />
+            {/* Pagination with search */}
+            <Route
+              path='/search/:keyword/page/:pageNumber'
+              component={HomeScreen}
+            />
           </Container>
         </main>
         <Footer />
