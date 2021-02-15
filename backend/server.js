@@ -17,21 +17,32 @@ const app = express()
 
 app.use(express.json())
 
-const __dirname = path.resolve()
-app.use('/uploads', express.static(path.join(__dirname, 'uploads')))
-
 // Mount Routers
 app.use('/api/products', productRoutes)
 app.use('/api/users', userRoutes)
 app.use('/api/orders', orderRoutes)
 
-app.get('/', (req, res) => {
-  res.send('API is running...')
-})
-
 app.get('/api/config/paypal', (req, res) =>
   res.send(process.env.PAYPAL_CLIENT_ID)
 )
+
+const __dirname = path.resolve()
+app.use('/uploads', express.static(path.join(__dirname, 'uploads')))
+
+// Loading index.html from react static asset built
+if (process.env.NODE_ENV === 'production') {
+  // set frontend build folder as a static folder
+  app.use(express.static(path.join(__dirname, 'frontend', 'build')))
+
+  // send index.html as a response for any route that's not in our API
+  app.get('*', (req, res) =>
+    res.sendFile(path.resolve(__dirname, 'frontend', 'build', 'index.html'))
+  )
+} else {
+  app.get('/', (req, res) => {
+    res.send('API is running...')
+  })
+}
 
 // Global error handler
 app.use(unhandledRoutes)
